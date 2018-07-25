@@ -114,7 +114,11 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
+<<<<<<< HEAD
 //#define SERIAL_PORT_2 0
+=======
+#define SERIAL_PORT_2 -1
+>>>>>>> parent of b7dfc7998... Disable SERIAL_PORT_2 by default and sanity-check it (#10748)
 
 /**
  * This setting determines the communication speed of the printer.
