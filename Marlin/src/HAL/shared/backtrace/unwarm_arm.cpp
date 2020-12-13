@@ -7,7 +7,7 @@
  * for free and use it as they wish, with or without modifications, and in
  * any context, commercially or otherwise. The only limitation is that I
  * don't guarantee that the software is fit for any purpose or accept any
- * liability for it's use or misuse - this software is without warranty.
+ * liability for its use or misuse - this software is without warranty.
  ***************************************************************************
  * File Description: Abstract interpreter for ARM mode.
  **************************************************************************/
@@ -124,13 +124,11 @@ UnwResult UnwStartArm(UnwState * const state) {
 
     /* MRS */
     else if ((instr & 0xFFBF0FFF) == 0xE10F0000) {
+      uint8_t rd = (instr & 0x0000F000) >> 12;
       #ifdef UNW_DEBUG
         const bool R = !!(instr & 0x00400000);
-      #else
-        constexpr bool R = false;
+        UnwPrintd4("MRS r%d,%s\t; r%d invalidated", rd, R ? "SPSR" : "CPSR", rd);
       #endif
-      uint8_t rd = (instr & 0x0000F000) >> 12;
-      UnwPrintd4("MRS r%d,%s\t; r%d invalidated", rd, R ? "SPSR" : "CPSR", rd);
 
       /* Status registers untracked */
       state->regData[rd].o = REG_VAL_INVALID;
